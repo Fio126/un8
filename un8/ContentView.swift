@@ -8,16 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject var todoManager = TodoManager()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        TabView {
+            MainTodoListView(todoManager: todoManager)
+                .tabItem {
+                    Label("Todos", systemImage:"checkmark.circle.fill")
+                }
+            HowManyMoreView(todoManager: todoManager)
+                .tabItem {
+                    Label("Number of todos", systemImage: "number.circle.fill")
+                }
         }
-        .padding()
     }
 }
+
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
